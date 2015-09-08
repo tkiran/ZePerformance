@@ -37,6 +37,7 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'ReviewProcess',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -50,16 +51,14 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.security.SecurityMiddleware',
 )
 
-TEMPLATE_DIRS = [
- '/home/local/PALYAM/baman/JivaTest/my_project/ZePerformance/ReviewProcess/templates'
-]
+
 
 ROOT_URLCONF = 'ZePerformance.urls'
 
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -67,10 +66,16 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
-                'ReviewProcess',
             ],
         },
     },
+]
+SETTINGS_DIR = os.path.dirname(__file__)
+PROJECT_PATH = os.path.join(SETTINGS_DIR, os.pardir)
+PROJECT_PATH = os.path.abspath(PROJECT_PATH)
+TEMPLATE_PATH = os.path.join(PROJECT_PATH, 'templates')
+TEMPLATE_DIRS = [
+ '/home/local/PALYAM/baman/JivaTest/my_project/ZePerformance/ReviewProcess/templates',
 ]
 
 WSGI_APPLICATION = 'ZePerformance.wsgi.application'
@@ -105,3 +110,5 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.8/howto/static-files/
 
 STATIC_URL = '/static/'
+      
+    
