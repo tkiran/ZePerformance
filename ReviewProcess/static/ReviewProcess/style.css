@@ -86,32 +86,26 @@ body {
     background:#fff;
 }
 .dropdown {
-    background:#fff;
+    background:#fffffff;
     border:1px solid #ccc;
     border-radius:4px;
     width:300px;
-    position: right;
-}
-.dropdown-toggle{
- position: right;   
 }
 .dropdown-menu>li>a {
     color:#428bca;
-    position: right;
 }
 .dropdown ul.dropdown-menu {
     border-radius:4px;
     box-shadow:none;
     margin-top:20px;
     width:300px;
-    position: right;
 }
 .dropdown ul.dropdown-menu:before {
     content: "";
     border-bottom: 10px solid #fff;
     border-right: 10px solid transparent;
     border-left: 10px solid transparent;
-    position: right;
+    position: absolute;
     top: -10px;
     right: 16px;
     z-index: 10;
@@ -121,8 +115,16 @@ body {
     border-bottom: 12px solid #ccc;
     border-right: 12px solid transparent;
     border-left: 12px solid transparent;
-    position: right;
+    position: absolute;
     top: -12px;
     right: 14px;
     z-index: 10;
+}
+.pull-right .dropdown-menu:after {
+    left: auto;
+    right: 13px;
+}
+.pull-right .dropdown-menu {
+    left: auto;
+    right: 0;
 }
