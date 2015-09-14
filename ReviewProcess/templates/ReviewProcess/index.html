@@ -26,6 +26,7 @@
                         {% if next %}
                         <input type="hidden" name="next" value="{{ next }}" />
                         {% endif %}
+                    {% if logout %}<label>Successfully  logged out.. </label>{% endif %}
                 	<input type="text" class="form-control" name="uid" placeholder="Email/UserID" required autofocus>
                 	<input type="password" name="upass" class="form-control" placeholder="Password" required>
                 	<button class="btn btn-lg btn-primary btn-block" type="submit">

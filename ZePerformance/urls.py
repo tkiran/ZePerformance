@@ -20,6 +20,7 @@ from django.conf.urls import url,patterns,include
 from django.contrib import admin
 urlpatterns = [
    url(r'^admin/', include(admin.site.urls)),
-url(r'^ReviewProcess/', include('ReviewProcess.urls')),
+   url(r'^ReviewProcess/', include('ReviewProcess.urls')),
+   #url(r'^logout/', include('ReviewProcess.urls')),
 
 ]

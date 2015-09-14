@@ -34,5 +34,12 @@ def home(request):
     context = RequestContext(request, {
        'name': 'Aman',
     })
-
+    return HttpResponse(template.render(context))
+@login_required
+def user_logout(request):
+    context = RequestContext(request,
+        {"logout":"True"})
+    logout(request)
+    # Redirect back to index page.
+    template = loader.get_template('ReviewProcess/index.html')
     return HttpResponse(template.render(context))
