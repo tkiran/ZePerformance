@@ -1,0 +1,68 @@
+
+<html>
+<head>
+<meta charset="UTF-8">
+<title>My Performance</title>
+
+    {% load staticfiles %}
+
+    <link rel="stylesheet" type="text/css" href="{% static 'ReviewProcess/style.css' %}" />
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//code.jquery.com/jquery-1.10.2.min.js"></script>
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+</head>
+<body>
+  <div class="container">
+      <div class="row">
+      <div class="col-md-5  toppad  pull-right col-md-offset-3 ">
+      </div>
+        <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xs-offset-0 col-sm-offset-0 col-md-offset-3 col-lg-offset-3 toppad">
+   
+   
+          <div class="panel panel-info">
+            <div class="panel-heading">
+              <table width="100%">
+              <tr><td width="80%"><h3 class="panel-title">{{ user.get_username }}</h3></td><td> <a href="{% url "profiles" edit_option=1 %}">Edit Profile</a></td></tr>
+              <table>
+            </div>
+            <div class="panel-body">
+              <div class="row">
+                <div align="center" class="col-md-3 col-lg-3 "> <img class="img-circle img-responsive" src="http://babyinfoforyou.com/wp-content/uploads/2014/10/avatar-300x300.png" alt="User Pic"> </div>
+                <div class=" col-md-9 col-lg-9 "> 
+                  <table class="table table-user-information">
+                    <tbody>
+                      <tr>
+                        <td>First Name:</td>
+
+                        <td>{% if user_id %}<input type="text" name="fname" value="edit"> {% else %}Aman{% endif %} </td>
+                      </tr>
+                      <tr>
+                        <td>Last Name:</td>
+                        <td>{% if user_id %}<input type="text" name="fname" value="edit"> {% else %}Rana{% endif %} </td>                      </tr>
+                      <tr><td>Phone Number</td>
+                        <td>{% if user_id %}<input type="text" name="fname" value="edit"> {% else %}09036642764{% endif %} </td>
+                      </tr>
+                      <tr>
+                        <td>Department:</td>
+                        <td>TSG</td>
+                      </tr>
+                      <tr>
+                        <td>Email</td>
+                        <td><a href="mailto:info@support.com">info@support.com</a></td>
+                      </tr>
+                      <tr>
+                        <td>Designation:</td>
+                        <td>Developer</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                  {% if user_id %} <center><a  class="btn btn-primary" href="#">Update Info</a></center>{% endif %}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+</body>
+</html>

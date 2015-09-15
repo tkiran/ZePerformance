@@ -13,7 +13,7 @@ def index(request):
 
     template = loader.get_template('ReviewProcess/index.html')
     context = RequestContext(request, {
-       'name': 'Aman',
+       'incorrect_login': False,
     })
     logout(request)
     username = password = ''
@@ -26,6 +26,10 @@ def index(request):
             if user.is_active:
                 login(request, user)
                 return HttpResponseRedirect(reverse('home'))
+        else:
+            context = RequestContext(request, {
+                    'incorrect_login': True,
+            })
     return HttpResponse(template.render(context))
 
 @login_required(login_url='/index/')
@@ -42,4 +46,12 @@ def user_logout(request):
     logout(request)
     # Redirect back to index page.
     template = loader.get_template('ReviewProcess/index.html')
+    return HttpResponse(template.render(context))
+
+@login_required
+def user_profile(request,edit_option):
+    context = RequestContext(request,
+        {"user_id":int(edit_option)})
+    # Redirect back to index page.
+    template = loader.get_template('ReviewProcess/profile.html')
     return HttpResponse(template.render(context))
