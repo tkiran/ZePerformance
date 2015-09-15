@@ -26,19 +26,15 @@
                         {% if next %}
                         <input type="hidden" name="next" value="{{ next }}" />
                         {% endif %}
-                    {% if logout %}<label>Successfully  logged out.. </label>{% endif %}
+                    {% if logout %}<label>Successfully  logged out <a href="/ReviewProcess">Click here to login </a></label>{% endif %}
+                    <div {% if logout %} style="display:none" {% endif %}  >
                 	<input type="text" class="form-control" name="uid" placeholder="Email/UserID" required autofocus>
                 	<input type="password" name="upass" class="form-control" placeholder="Password" required>
                 	<button class="btn btn-lg btn-primary btn-block" type="submit">
                     	Sign in</button>
-                	<label class="checkbox pull-left">
-                    <input type="checkbox" value="remember-me">
-                    Remember me
-                </label>
-                <a href="#" class="pull-right need-help">Need help? </a><span class="clearfix"></span>
+                    </div>
                 </form>
             </div>
-            <a href="#" class="text-center new-account">Create an account </a>
         </div>
     </div>
 </div>
