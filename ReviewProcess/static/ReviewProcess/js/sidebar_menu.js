@@ -7,7 +7,11 @@ $("#menu-toggle").click(function(e) {
         $("#wrapper").toggleClass("toggled-2");
         $('#menu ul').hide();
     });
- 
+ $(document).ready(function(){
+    $("#flip").click(function(){
+        $("#panel").slideToggle("slow");
+    });
+});
      function initMenu() {
       $('#menu ul').hide();
       $('#menu ul').children('.current').parent().show();

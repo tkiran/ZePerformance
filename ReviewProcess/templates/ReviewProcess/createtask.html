@@ -2,7 +2,10 @@
 
 {% block dashboard %}
   {% if reportees %}
-  <label class="col-md-4 control-label" for="selectbasic">Select Your Reportee Name</label>
+  <div class="row">
+  <div class="col-md-4">
+  	<label class="control-label" for="selectbasic">Select Your Reportee Name</label>
+  </div>
   <div class="col-md-4">
     <select id="selectbasic" name="selectbasic" class="form-control">
       {% for reportee in reportees %}
@@ -10,6 +13,14 @@
       {% endfor %}
     </select>
   </div>
+</div>
+<div class="row">
+	<div class="col-md-8">
+			<div id="flip">Competencies </div>
+			<div id="panel">Hello world!</div>
+	</div>
+</div>
+
   {% else %}
   <label class="col-md-8 control-label" for="selectbasic">You don't have permission to create a task</label>
   {% endif %}

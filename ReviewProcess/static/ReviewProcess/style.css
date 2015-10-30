@@ -128,3 +128,14 @@ body {
     left: auto;
     right: 0;
 }
+#panel, #flip {
+    padding: 5px;
+    text-align: center;
+    background-color: #A9D0F5;
+    border: solid 1px #c3c3c3;
+}
+
+#panel {
+    padding: 150px;
+    display: none;
+}
