@@ -14,6 +14,9 @@ Including another URLconf
     2. Add a URL to urlpatterns:  url(r'^blog/', include(blog_urls))
 """
 from django.conf.urls import url,patterns,include
+from django.conf.urls.static import static
+from ZePerformance import settings
+
 #from ReviewProcess.urls import urlpatterns as ReviewProcess_urlpatterns
 
 
@@ -23,4 +26,4 @@ urlpatterns = [
    url(r'^ReviewProcess/', include('ReviewProcess.urls')),
    #url(r'^logout/', include('ReviewProcess.urls')),
 
-]
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

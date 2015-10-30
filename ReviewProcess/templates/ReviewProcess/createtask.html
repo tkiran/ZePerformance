@@ -1,0 +1,17 @@
+{% extends "ReviewProcess/base.html" %}
+
+{% block dashboard %}
+  {% if reportees %}
+  <label class="col-md-4 control-label" for="selectbasic">Select Your Reportee Name</label>
+  <div class="col-md-4">
+    <select id="selectbasic" name="selectbasic" class="form-control">
+      {% for reportee in reportees %}
+      <option value="{{ reportee.id }}">{{ reportee.username }}</option>
+      {% endfor %}
+    </select>
+  </div>
+  {% else %}
+  <label class="col-md-8 control-label" for="selectbasic">You don't have permission to create a task</label>
+  {% endif %}
+
+{% endblock %}

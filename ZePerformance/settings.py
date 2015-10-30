@@ -71,11 +71,26 @@ TEMPLATES = [
     },
 ]
 SETTINGS_DIR = os.path.dirname(__file__)
-PROJECT_PATH = os.path.join(SETTINGS_DIR, os.pardir)
-PROJECT_PATH = os.path.abspath(PROJECT_PATH)
-TEMPLATE_PATH = os.path.join(PROJECT_PATH, 'templates')
-TEMPLATE_DIRS = [
- '/home/local/PALYAM/baman/JivaTest/my_project/ZePerformance/ReviewProcess/templates',
+# PROJECT_PATH = os.path.join(SETTINGS_DIR, os.pardir)
+# PROJECT_PATH = os.path.abspath(PROJECT_PATH)
+# TEMPLATE_PATH = os.path.join(PROJECT_PATH, 'templates')
+# TEMPLATE_DIRS = [
+#  '/home/local/PALYAM/baman/JivaTest/my_project/ZePerformance/ReviewProcess/templates',
+# ]
+TEMPLATES = [
+   {
+       'BACKEND': 'django.template.backends.django.DjangoTemplates',
+       'DIRS': [os.path.join(BASE_DIR, 'templates')],
+       'APP_DIRS': True,
+       'OPTIONS': {
+           'context_processors': [
+               'django.template.context_processors.debug',
+               'django.template.context_processors.request',
+               'django.contrib.auth.context_processors.auth',
+               'django.contrib.messages.context_processors.messages',
+           ],
+       },
+   },
 ]
 
 WSGI_APPLICATION = 'ZePerformance.wsgi.application'
@@ -112,6 +127,23 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.8/howto/static-files/
 
+# Static files (CSS, JavaScript, Images)
+# https://docs.djangoproject.com/en/1.8/howto/static-files/
+
 STATIC_URL = '/static/'
+
+# Absolute filesystem path to the directory that will hold user-uploaded files.
+# Example: "/home2/media/media.lawrence.com/media/"
+
+
+PROJECT_ROOT = os.path.realpath(os.path.dirname(__file__))
+MEDIA_ROOT = os.path.join(PROJECT_ROOT, 'media')
+
+
+# URL that handles the media served from MEDIA_ROOT. Make sure to use a
+# trailing slash.
+# Examples: "http://media.lawrence.com/media/", "http://example.com/media/"
+MEDIA_URL = '/media/'
+
       
     
