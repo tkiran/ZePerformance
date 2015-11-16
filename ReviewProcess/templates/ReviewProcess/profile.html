@@ -1,6 +1,7 @@
 {% extends "ReviewProcess/base.html" %}
 
 {% block dashboard %}
+
 <div class="panel panel-info">
     <div class="panel-heading">
           <table width="100%">
@@ -10,25 +11,44 @@
       </div>
   <div class="panel-body">
     <div class="row">
-      <div align="center" class="col-md-3 col-lg-3 "> <img class="img-circle img-responsive" src="http://babyinfoforyou.com/wp-content/uploads/2014/10/avatar-300x300.png" alt="User Pic"> </div>
-      <div class=" col-md-9 col-lg-9 "> 
-        <table class="table table-user-information">
-          <tbody>
-            <tr>
-              <td>First Name:</td>
-
-              <td>{% if user_id %}<input type="text" name="fname" value="edit"> {% else %}Aman{% endif %} </td>
-            </tr>
-            <tr>
-              <td>Last Name:</td>
-              <td>{% if user_id %}<input type="text" name="fname" value="edit"> {% else %}Rana{% endif %} </td>                      </tr>
-            <tr><td>Phone Number</td>
-              <td>{% if user_id %}<input type="text" name="fname" value="edit"> {% else %}09036642764{% endif %} </td>
-            </tr>
-            <tr>
-              <td>Department:</td>
-              <td>TSG</td>
-            </tr>
+            <table class="col-md-3 col-lg-3 ">
+                <tr>
+                  <td rowspan="2">
+                     <div  id="hover" align="center" > <img class="img-circle img-responsive" src="" alt="User Pic" >
+                     </div>
+                     <td>
+                        <div id="box" style="display: none">
+                        <a href="#" class="bt btleft">
+                          <span class="btn btn-default btn-file"> Browse <input type="file"></span>
+                        </a>  
+                    </div>
+                  </td>
+                  <td>dddd
+                  </td>
+                </tr>
+              </table>
+            <div class=" col-md-9 col-lg-9 "> 
+              <form name="updateinfo" method="post">
+              {% csrf_token %}
+              {{ form }}
+                <table class="table table-user-information">
+                  <tbody>
+                    <tr>
+                        <td>First Name:</td>
+                        <td><input type="text" name="fname" value={{ user.first_name }}>  </td>
+                    </tr>
+                    <tr>
+                      <td>Last Name:</td>
+                      <td><input type="text" name="fname" value={{ user.last_name }}>  </td>
+                   </tr>
+                  <tr>
+                    <td>Phone Number</td>
+                    <td><input type="text" name="fname" value="edit"> </td>
+                  </tr>
+              <tr>
+                  <td>Department:</td>
+                  <td>TSG</td>
+              </tr>
             <tr>
               <td>Email</td>
               <td><a href="mailto:info@support.com">info@support.com</a></td>
@@ -39,7 +59,8 @@
             </tr>
           </tbody>
         </table>
-        {% if user_id %} <center><a  class="btn btn-primary" href="#">Update Info</a></center>{% endif %}
+         <center><a  class="btn btn-primary"  type="submit" href="{% url "editprofinfo" %} ">Update Info</a></center>
+       </form>
       </div>
     </div>
   </div>
