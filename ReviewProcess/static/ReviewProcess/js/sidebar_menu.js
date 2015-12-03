@@ -7,13 +7,6 @@ $("#menu-toggle").click(function(e) {
         $("#wrapper").toggleClass("toggled-2");
         $('#menu ul').hide();
     });
- $(document).ready(function(){
-    $("#flip").click(function(){
-        $("#panel").slideToggle("slow");
-        $.ajax({url: "http://127.0.0.1:8000/ReviewProcess/getreviewquestion", success: function(result){
-            $("#flip").html(result);
-        }});
-    });
 });
      function initMenu() {
       $('#menu ul').hide();

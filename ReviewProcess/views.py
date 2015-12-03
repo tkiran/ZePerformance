@@ -71,8 +71,11 @@ def createtask(request):
     if ReportingManagerProfile.objects.filter(id=request.user.id).count():
         reporter = ReportingManagerProfile.objects.get(id=request.user.id)
         reportees = reporter.reportees.all()
-        context = {'reportees': reportees}
-    #import pdb;pdb.set_trace()
+        allobj = ReviewQuestion.objects.all()
+        context['reviewquestions'] = allobj
+        questiondict = {}
+        questionset = []
+        context = {'reportees': reportees,'reviewquestions' : allobj}
     return render_to_response(
        'ReviewProcess/createtask.html',context,
        context_instance=RequestContext(request)
@@ -82,8 +85,6 @@ def createtask(request):
 def editprofinfo(request):
     # Redirect back to index page.
     context = {}
-    import pdb;pdb.set_trace()
-    import pdb;pdb.set_trace()
     return render_to_response(
        'ReviewProcess/profile.html',context,
        context_instance=RequestContext(request)
@@ -99,6 +100,6 @@ def getreviewquestion(request):
     questionset = []
     import pdb;pdb.set_trace()
     return render_to_response(
-       'ReviewProcess/myfrom.html',context,
+       'ReviewProcess/myform.html',context,
        context_instance=RequestContext(request)
    )
