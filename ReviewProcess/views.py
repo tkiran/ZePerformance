@@ -72,6 +72,7 @@ def createtask(request):
         reporter = ReportingManagerProfile.objects.get(id=request.user.id)
         reportees = reporter.reportees.all()
         allobj = ReviewQuestion.objects.all()
+        import pdb;pdb.set_trace()
         context['reviewquestions'] = allobj
         questiondict = {}
         questionset = []

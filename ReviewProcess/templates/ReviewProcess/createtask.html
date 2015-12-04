@@ -25,6 +25,7 @@
                 <th>Designation</th>
                 <th>Details</th>
                 <th>Percentages</th>
+                <th>Select</th>
             </tr>
         </thead>
         <tbody>
@@ -35,6 +36,7 @@
                 <td>{{ ques.designation}}</td>
                 <td>{{ques.details}}</td>
                 <td><select> <option value ={{ques.percentages}}>{{ques.percentages}}</option></select></td>
+                <td><input type="checkbox" class="checkbox"></td>
             </tr>
           {% endfor %}
           {% endif %}
