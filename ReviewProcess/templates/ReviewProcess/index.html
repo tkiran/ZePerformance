@@ -11,16 +11,25 @@
 		<link rel="stylesheet" type="text/css" href="{% static 'ReviewProcess/bootstrap/bootstrap.min.css' %}" />
     </head>
 
-    <body>
-        <div style="float: left;height:50px;width:85%;">
- <font style="font-family: Source Sans Pro;margin: 10px 0px 0px 0px; vertical-align:center; color:#357f7b;float:right; padding-right: 10px; border-bottom:none;padding-top: 13px;font-size: 20px" class="modal-header">Welcome to ZeOmega Performance Management Solution</font>
+<body>
+<div class="container">
+<div class="main-header" style="wid height:50px;margin-top:0px;background-color:#ffffff; border-radius:5px 5px 0 0" id="header_div">
+   <div style="float: left;width: 15%;height: 50px;background-color: #ffffff;padding-bottom: 21px;">
+ <!--  <img src="http://upload.wikimedia.org/wikipedia/commons/thumb/c/ce/Coca-Cola_logo.svg/800px-Coca-Cola_logo.svg.png" height="60" style="padding: 10px 0px 10px 10px;" /> --> 
+ 
+         <img class="profile-img" src="{% static 'ReviewProcess/images/logo.jpg' %}" alt="">
+ 
+    
+   </div>
+
+ <div style="float: left;height:50px;width:85%;">
+ <font class="modal-header" style="font-family: Source Sans Pro;margin: 10px 0px 0px 0px; vertical-align:center; color:#357f7b;float:right; padding-right: 10px; border-bottom:none;padding-top: 13px;font-size:30px;">Welcome to ZeOmega Performance Management Solution</font>
 </div>
-	        <div class="container">
+</div>
     			<div class="row">
+
         	      <div class="col-sm-6 col-md-4 col-md-offset-4">
                       <div class="account-wall">
-                		<img class="profile-img" src="{% static 'ReviewProcess/images/logo.jpg' %}"
-                    alt="">
                 	<form class="form-signin" name="loginfrm" method="post">
                         {% csrf_token %}
                         {% if next %}
