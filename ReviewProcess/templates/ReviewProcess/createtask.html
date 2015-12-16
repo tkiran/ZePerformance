@@ -36,15 +36,20 @@
                 <td>{{ ques.designation}}</td>
                 <td>{{ques.details}}</td>
                 <td><select> <option value ={{ques.percentages}}>{{ques.percentages}}</option></select></td>
-                <td><input type="checkbox" class="checkbox"></td>
+                <td><input type="checkbox" class="checkbox" value= {{ques.percentages}}></td>
             </tr>
           {% endfor %}
           {% endif %}
         </tbody>
     </table>
-    </div> 
-<center><button type="button" class="btn btn-primary">Submit</button> </center>
-	</div>
+    </div>
+<div class="progressbar-container">
+  <div class="progressbar-bar"></div>
+    <div class="progressbar-label"></div>
+</div>
+<div class = "ready"></div>
+<center><button type="submit"  class="btn btn-primary" disabled>Submit</button> </center>
+</div>
 </div>
 
   {% else %}

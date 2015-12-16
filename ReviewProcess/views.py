@@ -14,7 +14,6 @@ from .forms import ContactForm
 from ReviewProcess.models import ReviewQuestion
 
 def index(request):
-    import pdb;pdb.set_trace()
     template = loader.get_template('ReviewProcess/index.html')
     context = RequestContext(request, {
        'incorrect_login': False,
@@ -72,7 +71,6 @@ def createtask(request):
         reporter = ReportingManagerProfile.objects.get(id=request.user.id)
         reportees = reporter.reportees.all()
         allobj = ReviewQuestion.objects.all()
-        import pdb;pdb.set_trace()
         context['reviewquestions'] = allobj
         questiondict = {}
         questionset = []
@@ -99,7 +97,6 @@ def getreviewquestion(request):
     context['reviewquestions'] = allobj
     questiondict = {}
     questionset = []
-    import pdb;pdb.set_trace()
     return render_to_response(
        'ReviewProcess/myform.html',context,
        context_instance=RequestContext(request)
