@@ -1,44 +1,32 @@
 <!DOCTYPE html>
 <html>
-
-    <head>
-    	
-        <title></title>
-
-		{% load staticfiles %}
-
-		<link rel="stylesheet" type="text/css" href="{% static 'ReviewProcess/style.css' %}" />
+    <head>{% load staticfiles %}
+        <link rel="stylesheet" type="text/css" href="{% static 'ReviewProcess/style.css' %}" />
 		<link rel="stylesheet" type="text/css" href="{% static 'ReviewProcess/bootstrap/bootstrap.min.css' %}" />
     </head>
 
 <body>
 <div class="container">
-<div class="main-header" style="wid height:50px;margin-top:0px;background-color:#ffffff; border-radius:5px 5px 0 0" id="header_div">
-   <div style="float: left;width: 15%;height: 50px;background-color: #ffffff;padding-bottom: 21px;">
- <!--  <img src="http://upload.wikimedia.org/wikipedia/commons/thumb/c/ce/Coca-Cola_logo.svg/800px-Coca-Cola_logo.svg.png" height="60" style="padding: 10px 0px 10px 10px;" /> --> 
- 
-         <img class="profile-img" src="{% static 'ReviewProcess/images/logo.jpg' %}" alt="">
- 
-    
+   <div class="pull-left">
+     <img class="profile-img" src="{% static 'ReviewProcess/images/zeomega.gif' %}" alt="">
    </div>
-
- <div style="float: left;height:50px;width:85%;">
- <font class="modal-header" style="font-family: Source Sans Pro;margin: 10px 0px 0px 0px; vertical-align:center; color:#357f7b;float:right; padding-right: 10px; border-bottom:none;padding-top: 13px;font-size:30px;">Welcome to ZeOmega Performance Management Solution</font>
+   <div class="">
+    <font class="modal-header" style="font-family: Source Sans Pro;margin: 10px 0px 0px 0px; vertical-align:center; color:#357f7b;float:right; padding-right: 10px; border-bottom:none;padding-top: 13px;font-size:30px;">Welcome to ZeOmega Performance Management Solution</font>
+   </div>
 </div>
-</div>
-    			<div class="row">
-
-        	      <div class="col-sm-6 col-md-4 col-md-offset-4">
-                      <div class="account-wall">
-                	<form class="form-signin" name="loginfrm" method="post">
-                        {% csrf_token %}
-                        {% if next %}
-                        <input type="hidden" name="next" value="{{ next }}" />
-                        {% endif %}
-                    {% if logout %}<label>Successfully  logged out <a href="/ReviewProcess">Click here to login </a></label>{% endif %}
-                    {% if incorrect_login %}<label>Incorrect  ID or Password</label>{% endif %}
-                    <div {% if logout %} style="display:none" {% endif %}  >
-                	<input type="text" class="form-control" name="uid" placeholder="Email/UserID" required autofocus>
+    			
+<div id="content-main">
+  <div>
+    <div class="account-wall">
+      <form class="form-signin" name="loginfrm" method="post">
+       {% csrf_token %}
+       {% if next %}
+       <input type="hidden" name="next" value="{{ next }}" />
+        {% endif %}
+        {% if logout %}<label>Successfully  logged out <a href="/ReviewProcess">Click here to login </a></label>{% endif %}
+        {% if incorrect_login %}<label>Incorrect  ID or Password</label>{% endif %}
+        <div {% if logout %} style="display:none" {% endif %}  >
+        <input type="text" class="form-control" name="uid" placeholder="User Name" required autofocus>
                 	<input type="password" name="upass" class="form-control" placeholder="Password" required>
                 	<button class="btn btn-lg btn-primary btn-block" type="submit">
                     	Sign in</button>

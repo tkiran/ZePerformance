@@ -9,4 +9,5 @@ urlpatterns = [
                url(r'^profiles/$', views.user_profile, name='profiles'),		
                url(r'^createtask/$', views.createtask, name='createtask'),		
                url(r'^getreviewquestion/$', views.getreviewquestion, name='getreviewquestion'),
+               url(r'^editpage/$', views.update_profile, name='editpage'),
 ]

@@ -105,7 +105,7 @@ DATABASES = {
         'NAME': 'test',
         'HOST': 'localhost',
         'USER': 'root',
-        'PASSWORD': 'root',
+        'PASSWORD': 'zeadmin',
         'PORT': '3306',
     }
 }
