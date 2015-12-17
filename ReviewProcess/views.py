@@ -10,15 +10,8 @@ from django.contrib.auth import authenticate, login, logout
 from django.core.urlresolvers import reverse
 from ReviewProcess.models import ReportingManagerProfile
 from django import forms
-from .forms import ContactForm
-<<<<<<< Updated upstream
-from ReviewProcess.models import ReviewQuestion
+from ReviewProcess.models import ReviewQuestion, UserReviewQuestion
 from django.contrib.auth.models import User
-=======
-from ReviewProcess.models import ReviewQuestion,UserReviewQuestion
-from ReviewProcess.forms import UpdateProfileForm,UserReviewQuestionForm
-
->>>>>>> Stashed changes
 
 def index(request):
     template = loader.get_template('ReviewProcess/index.html')
