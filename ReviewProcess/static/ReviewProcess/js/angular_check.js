@@ -30,13 +30,17 @@ $(document).ready(function() {
     			
     				if($("input:checked")[0] != undefined && $(this).prop("checked")){
         				currentProgress += parseInt($(this)[0].value);
+                $('#sel_ques_'+$(this)[0].id).attr("name",'sel_ques_'+$(this)[0].id)
+                 $('#sel_ques_'+$(this)[0].id).attr("value",$(this)[0].id);
+                  i = i+1;
+
         			}
         			else{
         					currentProgress -= parseInt($(this)[0].value);
+                  $('#sel_ques_'+$(this)[0].id).removeAttr("name");
+                  $('#sel_ques_'+$(this)[0].id).removeAttr("value");
+                  i = i-1;
         			}
-        		
-
-        //$( ".progressbar-bar" ).progressbar("value" , currentProgress )
         if(currentProgress <= 100 ){
         	$(".progressbar-bar").progressbar({
             value: currentProgress
@@ -52,12 +56,24 @@ $(document).ready(function() {
         }
         if ( currentProgress == 100 )
         {
-     	   $(":submit").removeAttr("disabled")
+         	   $(":submit").removeAttr("disabled")
+             var values = new Array();
+              $.each($("input[name='checkboxlist']:checked"), function() {
+              values.push($(this)[0].id);
+            });
+            $('#selectcount').attr("value",values)
     	}
     	else{
     		$(":submit").attr("disabled", true)
     	}
  }
   $(":checkbox").click(adjustProgress);
-  
+  $('#userid').attr("value",$('select[name="selectbasic"] option:selected').val())
+
+
+$('#selectbasic').change(function(){
+        $('#userid').attr("value",$('select[name="selectbasic"] option:selected').val())
 });
+
+});
+

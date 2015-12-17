@@ -11,8 +11,14 @@ from django.core.urlresolvers import reverse
 from ReviewProcess.models import ReportingManagerProfile
 from django import forms
 from .forms import ContactForm
+<<<<<<< Updated upstream
 from ReviewProcess.models import ReviewQuestion
 from django.contrib.auth.models import User
+=======
+from ReviewProcess.models import ReviewQuestion,UserReviewQuestion
+from ReviewProcess.forms import UpdateProfileForm,UserReviewQuestionForm
+
+>>>>>>> Stashed changes
 
 def index(request):
     template = loader.get_template('ReviewProcess/index.html')
@@ -93,7 +99,7 @@ def getreviewquestion(request):
        'ReviewProcess/myform.html',context,
        context_instance=RequestContext(request)
    )
-
+@login_required
 def update_profile(request):
     error = False
     if request.REQUEST.get('user', None):
@@ -107,4 +113,20 @@ def update_profile(request):
     return render_to_response('ReviewProcess/profile.html',
                               context,
                               context_instance=RequestContext(request))
+
+@login_required
+def save_user_question(request):
+    if request.method == 'POST':
+        sel_value = request.POST.get('selectcount').split(',')
+        count = len(sel_value)
+        uid = request.POST.get('userid')
+        urq = UserReviewQuestion.objects.create(user_id=uid)
+        urq.question.clear()
+        for index in range(count):
+            quesid = request.POST.get('sel_ques_'+sel_value[index])
+            urq.question.add(ReviewQuestion.objects.get(id=int(quesid)))
+            urq.save()
+
+    return render_to_response('ReviewProcess/createtask.html',
+       context_instance=RequestContext(request))
 
