@@ -29,18 +29,18 @@
               </table>
 
             <div class=" col-md-9 col-lg-9 "> 
-              <form name="updateinfo" action="{% url "editpage" %}" method="POST">
+              <form name="updateinfo" action="{% url "editpage" %}" method="POST" enctype="multipart/form-data">
+                <input type="hidden" name="user" value="{{ user }}">
               {% csrf_token %}
-              {{ form }}
                 <table class="table table-user-information">
                   <tbody>
                     <tr>
                         <td>First Name:</td>
-                        <td><input type="text" name="fname" value={{ user.first_name }} disabled>  </td>
+                        <td><input type="text" name="fname" value={{ user.first_name }} disabled required>  </td>
                     </tr>
                     <tr>
                       <td>Last Name:</td>
-                      <td><input type="text" name="lname" value={{ user.last_name }}>  </td>
+                      <td><input type="text" name="lname" value={{ user.last_name }} required>  </td>
                    </tr>
                 <tr>
               <td>Email:</td>

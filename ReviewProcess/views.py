@@ -12,7 +12,7 @@ from ReviewProcess.models import ReportingManagerProfile
 from django import forms
 from .forms import ContactForm
 from ReviewProcess.models import ReviewQuestion
-from ReviewProcess.forms import UpdateProfileForm
+from django.contrib.auth.models import User
 
 def index(request):
     template = loader.get_template('ReviewProcess/index.html')
@@ -95,9 +95,16 @@ def getreviewquestion(request):
    )
 
 def update_profile(request):
-    args = {}
-    if request.method == 'POST':
-        form = UpdateProfileForm(request.POST)
-        if form.is_valid():
-            form.save()
-            print "updated successfully"
+    error = False
+    if request.REQUEST.get('user', None):
+        user = User.objects.get(username=request.REQUEST.get('user'))
+        if request.method == 'POST':
+            user.last_name = request.REQUEST.get('lname')
+            user.save()
+    context = {
+        'error' : error
+    }
+    return render_to_response('ReviewProcess/profile.html',
+                              context,
+                              context_instance=RequestContext(request))
+
