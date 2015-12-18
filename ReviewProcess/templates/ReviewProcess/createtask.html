@@ -19,6 +19,7 @@
     {% csrf_token %}
     {{ form }}
 	<div class="col-md-8">
+    <input type="hidden" name="username" id = "username">
 			<div id="flip">Competencies List </div>
       <div class="bs-example pre-scrollable">
        <table class="table table-hover">
@@ -57,12 +58,22 @@
 <input type="hidden" id="userid" name="userid" value="">
 <input type="hidden" id="selectcount" name="selectcount" value="">
 <center><button type="submit"  class="btn btn-primary" disabled>Submit</button> </center>
+<div id="dialog-modal" title="Basic modal dialog" style="display: none;"></div>
 </div>
+{% else %}
+    {% if taskassigned %}
+    <label class="col-md-8 control-label" for="selectbasic">Task successfully assigned to {{ username }} &nbsp;&nbsp;&nbsp;&nbsp; <a href="" id="opener" name=" {{ username }}">View Task</a>
+   <div id="dialog-1" title="Dialog Title goes here...">This my first jQuery UI Dialog!</div>
+
+    </label>
+    {% else %}
+    <label class="col-md-8 control-label" for="selectbasic">You don't have permission to create a task</label>
+    {% endif %}
+  {% endif %}
 </form>
 </div>
 
-  {% else %}
-  <label class="col-md-8 control-label" for="selectbasic">You don't have permission to create a task</label>
-  {% endif %}
+
+  
 
 {% endblock %}

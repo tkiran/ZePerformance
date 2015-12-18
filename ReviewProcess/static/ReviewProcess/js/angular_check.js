@@ -69,11 +69,24 @@ $(document).ready(function() {
  }
   $(":checkbox").click(adjustProgress);
   $('#userid').attr("value",$('select[name="selectbasic"] option:selected').val())
-
+  $('#username').attr("value",$('select[name="selectbasic"] option:selected').text())
 
 $('#selectbasic').change(function(){
         $('#userid').attr("value",$('select[name="selectbasic"] option:selected').val())
+        $('#username').attr("value",$('select[name="selectbasic"] option:selected').text())
 });
 
 });
-
+$(function() {
+            $( "#dialog-1" ).dialog({
+               autoOpen: false,  
+            });
+            $( "#opener" ).click(function() {
+               $( "#dialog-1" ).dialog( "open" );
+               var modal = $(this)
+               $.ajax({ url: "http://127.0.0.1:8100/ReviewProcess/showassignedtask?uname="+$(this)[0].name,
+                context: document.body
+                 }).done(function(response) { modal.html(response); 
+                });
+               });
+         });

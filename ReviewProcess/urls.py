@@ -11,4 +11,5 @@ urlpatterns = [
                url(r'^getreviewquestion/$', views.getreviewquestion, name='getreviewquestion'),
                url(r'^editpage/$', views.update_profile, name='editpage'),
                url(r'^assignusertask/$', views.save_user_question, name='assignusertask'),
+               url(r'^showassignedtask/$', views.show_user_task, name='showassignedtask'),
 ]

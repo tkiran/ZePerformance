@@ -109,17 +109,40 @@ def update_profile(request):
 
 @login_required
 def save_user_question(request):
+    """
+    """
+    uname = ''
     if request.method == 'POST':
         sel_value = request.POST.get('selectcount').split(',')
         count = len(sel_value)
         uid = request.POST.get('userid')
-        urq = UserReviewQuestion.objects.create(user_id=uid)
-        urq.question.clear()
-        for index in range(count):
-            quesid = request.POST.get('sel_ques_'+sel_value[index])
-            urq.question.add(ReviewQuestion.objects.get(id=int(quesid)))
-            urq.save()
+        uname = request.POST.get('username')
+        import pdb;pdb.set_trace()
+        if(UserReviewQuestion.objects.count()):
+            dd = UserReviewQuestion.objects.get(user_id=uid)
+            dd.delete()
+            urq = UserReviewQuestion.objects.create(user_id=uid)
+            urq.question.clear()
+            for index in range(count):
+                quesid = request.POST.get('sel_ques_'+sel_value[index])
+                urq.question.add(ReviewQuestion.objects.get(id=int(quesid)))
+                urq.save()
+        else:
+            urq = UserReviewQuestion.objects.create(user_id=uid)
+            urq.question.clear()
+            for index in range(count):
+                quesid = request.POST.get('sel_ques_'+sel_value[index])
+                urq.question.add(ReviewQuestion.objects.get(id=int(quesid)))
+                urq.save()
+    
+    return render_to_response(
+            'ReviewProcess/createtask.html', {'taskassigned': True,'username':uname},
+            context_instance=RequestContext(request))
 
-    return render_to_response('ReviewProcess/createtask.html',
-       context_instance=RequestContext(request))
-
+@login_required
+def show_user_task(request):
+    """
+    """
+    import pdb;pdb.set_trace()
+    uname = request.GET.get('uname')
+    UserReviewQuestion.objects.get(username=uname)
