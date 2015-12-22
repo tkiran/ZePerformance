@@ -31,7 +31,17 @@
                     <a href="{% url "home" %}"><span class="fa-stack fa-lg pull-left"><i class="fa fa-dashboard fa-stack-1x "></i></span> My Task </a>
                        <ul class="nav-pills nav-stacked" style="list-style-type:none;">
                         <li><a class="disabled" href="{% url "createtask" %}">Create Task</a></li>
-                        <li role="presentation"><a role="menuitem" tabindex="-1" href="#">My Review Form<span class="badge">1</span></a></li>
+                        <li role="presentation">
+                            {% if assignedtask %}
+                            <a role="menuitem" tabindex="-1" href="{% url "showassignedform" %}">                          
+                            My Review Form<span class="badge">1</span></a>
+                            </li>
+                            {% else %}
+                            <a role="menuitem" tabindex="-1" href="#">
+                            No Task <span class="badge"></span></a>
+                        </li>
+                            {% endif %}
+                            
                     </ul>
                 <li>
                     <a href="#"><span class="fa-stack fa-lg pull-left"><i class="fa fa-flag fa-stack-1x "></i></span>My Profile</a>

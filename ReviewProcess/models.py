@@ -28,4 +28,8 @@ class UserReviewQuestion(models.Model):
     user = models.ForeignKey(User)
     question = models.ManyToManyField(ReviewQuestion)
 
+class UserTask(models.Model):
+    user = models.ForeignKey(User)
+    task_assigned = models.IntegerField(default=0)
+
 

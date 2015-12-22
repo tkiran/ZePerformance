@@ -10,7 +10,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.core.urlresolvers import reverse
 from ReviewProcess.models import ReportingManagerProfile
 from django import forms
-from ReviewProcess.models import ReviewQuestion, UserReviewQuestion
+from ReviewProcess.models import ReviewQuestion, UserReviewQuestion, UserTask
 from django.contrib.auth.models import User
 
 def index(request):
@@ -37,8 +37,13 @@ def index(request):
 @login_required(login_url='/index/')
 def home(request):
     template = loader.get_template('ReviewProcess/home.html')
+    import pdb;pdb.set_trace()
+    assignedtask = False
+    if(request.user.usertask_set.all()):
+        assignedtask = True
     context = RequestContext(request, {
        'name': 'Aman',
+       'assignedtask' : assignedtask
     })
     return HttpResponse(template.render(context))
 @login_required
@@ -118,6 +123,13 @@ def save_user_question(request):
         uid = request.POST.get('userid')
         uname = request.POST.get('username')
         import pdb;pdb.set_trace()
+        if(UserTask.objects.count() > 0):
+            try:
+                user_task = UserTask.objects.get(user_id=uid)
+            except UserTask.DoesNotExist, e:
+                user_task = UserTask.objects.create(user_id=uid)
+        else:
+            user_task_exits.objects.create(user_id=uid)
         if(UserReviewQuestion.objects.count()):
             dd = UserReviewQuestion.objects.get(user_id=uid)
             dd.delete()
@@ -136,7 +148,7 @@ def save_user_question(request):
                 urq.save()
     
     return render_to_response(
-            'ReviewProcess/createtask.html', {'taskassigned': True,'username':uname},
+            'ReviewProcess/createtask.html', {'taskassigned': True,'username':uname,'assignedtask': True},
             context_instance=RequestContext(request))
 
 @login_required
@@ -146,3 +158,19 @@ def show_user_task(request):
     import pdb;pdb.set_trace()
     uname = request.GET.get('uname')
     UserReviewQuestion.objects.get(username=uname)
+
+@login_required
+def show_user_form(request):
+    """
+    """
+    questionid = [q.id for q in UserReviewQuestion.objects.get(user_id=int(request.user.id)).question.all()]
+    for i in range(len(questionid)):
+        import pdb;pdb.set_trace()
+        questionkey = ReviewQuestion.objects.get(id = int(questionid[i]))
+
+
+
+    return render_to_response(
+            'ReviewProcess/show_user_form.html',{'assignedtask': True})
+
+
