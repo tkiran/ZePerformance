@@ -28,7 +28,7 @@
         <div id="sidebar-wrapper">
             <ul class="sidebar-nav nav-pills nav-stacked" id="menu">
                 <li class="active">
-                    <a href="{% url "home" %}"><span class="fa-stack fa-lg pull-left"><i class="fa fa-dashboard fa-stack-1x "></i></span> My Task </a>
+                    <a href="{% url "home" %}"><i class="fa fa-tasks"></i> My Task </a>
                        <ul class="nav-pills nav-stacked" style="list-style-type:none;">
                         <li><a class="disabled" href="{% url "createtask" %}">Create Task</a></li>
                         <li role="presentation">
@@ -44,7 +44,7 @@
                             
                     </ul>
                 <li>
-                    <a href="#"><span class="fa-stack fa-lg pull-left"><i class="fa fa-flag fa-stack-1x "></i></span>My Profile</a>
+                    <a href="#"><i class="fa fa-user"></i> My Profile</a>
                     <ul class="nav-pills nav-stacked" style="list-style-type:none;">
                         <li><a href="{% url "profiles" %}"><span class="fa-stack fa-lg pull-left"><i class="fa fa-flag fa-stack-1x "></i></span>Edit Profile</a></li>
                         <li><a href="#"><span class="fa-stack fa-lg pull-left"><i class="fa fa-flag fa-stack-1x "></i></span>link2</a></li>
@@ -52,13 +52,13 @@
                     </ul>
                 </li>
                 <li>
-                    <a href="#"><span class="fa-stack fa-lg pull-left"><i class="fa fa-cloud-download fa-stack-1x "></i></span>Overview</a>
+                    <a href="#"><i class="fa fa-camera-retro"></i> Overview</a>
                 </li>
                 <li>
-                    <a href="#"> <span class="fa-stack fa-lg pull-left"><i class="fa fa-cart-plus fa-stack-1x "></i></span>Events</a>
+                    <a href="#"><i class="fa fa-calendar"></i> Events</a>
                 </li>
                 <li>
-                    <a href="{% url "logout" %}"><span class="fa-stack fa-lg pull-left"><i class="fa fa-server fa-stack-1x "></i></span>Logout</a>
+                    <a href="{% url "logout" %}"><i class="fa fa-sign-out"></i> Logout</a>
                 </li>
             </ul>
         </div><!-- /#sidebar-wrapper -->
