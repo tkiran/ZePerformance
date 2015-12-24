@@ -163,14 +163,9 @@ def show_user_task(request):
 def show_user_form(request):
     """
     """
-    questionid = [q.id for q in UserReviewQuestion.objects.get(user_id=int(request.user.id)).question.all()]
-    for i in range(len(questionid)):
-        import pdb;pdb.set_trace()
-        questionkey = ReviewQuestion.objects.get(id = int(questionid[i]))
-
-
-
+    questions = UserReviewQuestion.objects.get(user_id=int(request.user.id)).question.all()
+    import pdb;pdb.set_trace()
     return render_to_response(
-            'ReviewProcess/show_user_form.html',{'assignedtask': True})
+            'ReviewProcess/show_user_form.html',{'assignedtask': True,'questions':questions})
 
 
