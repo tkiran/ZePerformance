@@ -37,7 +37,6 @@ def index(request):
 @login_required(login_url='/index/')
 def home(request):
     template = loader.get_template('ReviewProcess/home.html')
-    import pdb;pdb.set_trace()
     assignedtask = False
     if(request.user.usertask_set.all()):
         assignedtask = True
@@ -122,7 +121,6 @@ def save_user_question(request):
         count = len(sel_value)
         uid = request.POST.get('userid')
         uname = request.POST.get('username')
-        import pdb;pdb.set_trace()
         if(UserTask.objects.count() > 0):
             try:
                 user_task = UserTask.objects.get(user_id=uid)
@@ -155,7 +153,6 @@ def save_user_question(request):
 def show_user_task(request):
     """
     """
-    import pdb;pdb.set_trace()
     uname = request.GET.get('uname')
     UserReviewQuestion.objects.get(username=uname)
 
@@ -164,7 +161,6 @@ def show_user_form(request):
     """
     """
     questions = UserReviewQuestion.objects.get(user_id=int(request.user.id)).question.all()
-    import pdb;pdb.set_trace()
     return render_to_response(
             'ReviewProcess/show_user_form.html',{'assignedtask': True,'questions':questions})
 
