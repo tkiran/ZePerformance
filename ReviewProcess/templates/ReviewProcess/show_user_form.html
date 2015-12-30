@@ -2,6 +2,9 @@
 
 {% block dashboard %}
 <div>
+<form  name="sendformtoreviewer" action="{% url "sendformtoreviewer" %}" method="POST">
+   {% csrf_token %}
+    {{ form }}
   <table class="table">
     <thead>
       <tr>
@@ -14,24 +17,52 @@
     </thead>
     <tbody>
     {% for question in questions %}
-      <tr class="success">
-        <td>{{ question.competencies }}</td>
-        <td>{{ question.details }}</td>
-        <td>{{ question.percentages }}</td>
-        <td>
-			 <select>
-			 <option value="">Select One </option>
-			  <option value="1">1</option>
-			  <option value="2">2</option>
-			  <option value="3">3</option>
-			  <option value="4">4</option>
-			</select> 
+      <tr>
+      <div class="row">
+  <div class="col-xs-4">
+
+    <td><input type="hidden" name="quesid" value= {{question.id}}>{{ question.competencies }}</td>
+  </div>
+  <td>{{ question.percentages }}</td>
+  <div class="col-xs-4">
+    <td>{{ question.details }}</td>
+  </div>
+  <div class="col-xs-4">
+    <td>
+     <select name="rq-{{ question.id }}" >
+       <option value="">Select One </option>
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+      </select> 
+
         </td>
-        <td><textarea rows="4" cols="50"></textarea></td>
-      </tr>
+</div>
+<div class="col-xs-4">
+<td><textarea rows="4" cols="50"></textarea></td>
+</div>
+</div>
+</tr>
       {% endfor %}
+      
     </tbody>
   </table>
-
+  <div class="row">
+  <div class="col-xs-4">
+    <label>Select Your Reviewer Name</label>
+  </div>
+  <div class="col-xs-4">
+    <select class="form-control" id="sel1">
+        <option>Select-One</option>
+        <option value={{ assigned_by_obj.id }}> {{ assigned_by_obj.first_name }} </option>
+      </select>
+  </div>
+  <div class="col-xs-4">
+    <button class="btn btn-default" type="submit">Submit For Review</button>
+    sendformtoreviewer
+  </div>
+</div>
+</form>
 </div>
 {% endblock %}

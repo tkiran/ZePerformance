@@ -125,9 +125,9 @@ def save_user_question(request):
             try:
                 user_task = UserTask.objects.get(user_id=uid)
             except UserTask.DoesNotExist, e:
-                user_task = UserTask.objects.create(user_id=uid)
+                user_task = UserTask.objects.create(user_id=uid,assigned_by=int(request.user.id))
         else:
-            user_task_exits.objects.create(user_id=uid)
+            user_task_exits.objects.create(user_id=uid,assigned_by=int(request.user.id))
         if(UserReviewQuestion.objects.count()):
             dd = UserReviewQuestion.objects.get(user_id=uid)
             dd.delete()
@@ -161,7 +161,19 @@ def show_user_form(request):
     """
     """
     questions = UserReviewQuestion.objects.get(user_id=int(request.user.id)).question.all()
+    assigned_by_id = UserTask.objects.get(user_id=int(request.user.id)).assigned_by
+    assigned_by_obj =  User.objects.get(id = int(assigned_by_id))
+
     return render_to_response(
-            'ReviewProcess/show_user_form.html',{'assignedtask': True,'questions':questions})
+            'ReviewProcess/show_user_form.html',{'assignedtask': True,'questions':questions,'assigned_by_obj':assigned_by_obj},
+            context_instance=RequestContext(request))
+
+@login_required
+def send_review_form_to_reviewer(request):
+    """
+    """
+    import pdb;pdb.set_trace()
+    return render_to_response(
+            'ReviewProcess/show_user_form.html',{'assignedtask': True,'questions':questions,'assigned_by_obj':assigned_by_obj})
 
 

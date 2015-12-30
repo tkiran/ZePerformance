@@ -30,6 +30,10 @@ class UserReviewQuestion(models.Model):
 
 class UserTask(models.Model):
     user = models.ForeignKey(User)
+    assigned_by = models.IntegerField()
     task_assigned = models.IntegerField(default=0)
 
-
+class SubmitTaskToReviewer(models.Model):
+    user = models.ForeignKey(User)
+    questid = models.IntegerField()
+    task_assigned = models.IntegerField(default=0)

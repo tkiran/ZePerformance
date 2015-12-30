@@ -22,8 +22,30 @@
 <script src="http://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
 </head>
 <body>
-      <p class="navbar-text navbar-right">Signed in as  <b>{{ user.get_username }} </b></a></p>
+      <p class="navbar-text navbar-right">Signed in as  <b>{{ user.get_username }} </b></a>
+      </p>
 <div id="wrapper">
+    <div id="ac-wrapper" style='display:none'>
+    <div id="popup">
+        <center>
+             <h2>Popup Content Here</h2>
+            <input type="submit" name="submit" value="Submit" onClick="PopUp('hide')" />
+        </center>
+    </div>
+</div>
+     <div id="clicker">Click Me!</div>
+
+<div id="popup-wrapper" class="bs-example">
+    <div class="alert alert-info">
+        <a href="#" id="close-btn" class="close" data-dismiss="alert">×</a>
+        <strong>Info!</strong> One task Assigned to You  
+        {% if assignedtask %}
+            <a role="" tabindex="-1" href="{% url "showassignedform" %}">
+                View Task</a>                          
+        {% endif %}
+            
+    </div>
+</div>
         <!-- Sidebar -->
         <div id="sidebar-wrapper">
             <ul class="sidebar-nav nav-pills nav-stacked" id="menu">
@@ -77,8 +99,9 @@
     </div>
     <!-- /#wrapper -->
     <!-- jQuery -->
-
-    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+<link href="{% static 'ReviewProcess/jQuery-modalPopLite/modalPopLite.css' %}" rel="stylesheet" type="text/css"> 
+<script type="text/javascript" src="{% static 'ReviewProcess/jQuery-modalPopLite/modalPopLite.min.js' %}"></script> 
     <script src="{% static 'ReviewProcess/js/sidebar_menu.js' %}" /></script>
     <script src="{% static 'ReviewProcess/js/angular_check.js' %}" /></script>
 

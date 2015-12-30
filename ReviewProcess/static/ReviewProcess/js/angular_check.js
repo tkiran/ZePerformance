@@ -76,6 +76,10 @@ $('#selectbasic').change(function(){
         $('#username').attr("value",$('select[name="selectbasic"] option:selected').text())
 });
 
+$(function () {
+    $('#popup-wrapper').modalPopLite({ openButton: '#clicker', closeButton: '#close-btn' });
+}); 
+
 });
 $(function() {
             $( "#dialog-1" ).dialog({
