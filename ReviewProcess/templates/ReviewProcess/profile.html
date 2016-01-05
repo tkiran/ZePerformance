@@ -11,23 +11,6 @@
       </div>
   <div class="panel-body">
     <div class="row">
-            <table class="col-md-3 col-lg-3 ">
-                <tr>
-                  <td rowspan="2">
-                     <div  id="hover" align="center" > <img class="img-circle img-responsive" src="" alt="User Pic" >
-                     </div>
-                     <td>
-                        <div id="box" style="display: none">
-                        <a href="#" class="bt btleft">
-                          <span class="btn btn-default btn-file"> Browse <input type="file"></span>
-                        </a>  
-                    </div>
-                  </td>
-                  <td>
-                  </td>
-                </tr>
-              </table>
-
             <div class=" col-md-9 col-lg-9 "> 
               <form name="updateinfo" action="{% url "editpage" %}" method="POST" enctype="multipart/form-data">
                 <input type="hidden" name="user" value="{{ user }}">

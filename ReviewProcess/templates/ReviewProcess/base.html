@@ -22,8 +22,7 @@
 <script src="http://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
 </head>
 <body>
-      <p class="navbar-text navbar-right">Signed in as  <b>{{ user.get_username }} </b></a>
-      </p>
+      <p class="navbar-text navbar-right">Signed in as  <b>{{ user.get_username }} </b></a></p>
 <div id="wrapper">
     <div id="ac-wrapper" style='display:none'>
     <div id="popup">
@@ -33,19 +32,7 @@
         </center>
     </div>
 </div>
-     <div id="clicker">Click Me!</div>
 
-<div id="popup-wrapper" class="bs-example">
-    <div class="alert alert-info">
-        <a href="#" id="close-btn" class="close" data-dismiss="alert">×</a>
-        <strong>Info!</strong> One task Assigned to You  
-        {% if assignedtask %}
-            <a role="" tabindex="-1" href="{% url "showassignedform" %}">
-                View Task</a>                          
-        {% endif %}
-            
-    </div>
-</div>
         <!-- Sidebar -->
         <div id="sidebar-wrapper">
             <ul class="sidebar-nav nav-pills nav-stacked" id="menu">
@@ -68,9 +55,7 @@
                 <li>
                     <a href="#"><i class="fa fa-user"></i> My Profile</a>
                     <ul class="nav-pills nav-stacked" style="list-style-type:none;">
-                        <li><a href="{% url "profiles" %}"><span class="fa-stack fa-lg pull-left"><i class="fa fa-flag fa-stack-1x "></i></span>Edit Profile</a></li>
-                        <li><a href="#"><span class="fa-stack fa-lg pull-left"><i class="fa fa-flag fa-stack-1x "></i></span>link2</a></li>
- 
+                        <li><a href="{% url "profiles" %}"><span><i class="fa fa-user"></i></span> Edit Profile</a></li> 
                     </ul>
                 </li>
                 <li>
@@ -87,12 +72,8 @@
         <!-- Page Content -->
         <div id="page-content-wrapper">
             <div class="container-fluid xyz">
-                <div class="row">
-                    <div class="col-lg-12">
                         {% block dashboard %}
                         {% endblock %}
-                    </div>
-                </div>
             </div>
         </div>
         <!-- /#page-content-wrapper -->
