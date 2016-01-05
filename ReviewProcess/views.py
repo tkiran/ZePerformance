@@ -70,7 +70,7 @@ def Test(request):
 @login_required
 def createtask(request):
     # Redirect back to index page.
-    context = {}
+    context = {'assignedtask': True}
     if ReportingManagerProfile.objects.filter(id=request.user.id).count():
         reporter = ReportingManagerProfile.objects.get(id=request.user.id)
         reportees = reporter.reportees.all()
@@ -78,10 +78,10 @@ def createtask(request):
         context['reviewquestions'] = allobj
         questiondict = {}
         questionset = []
-        context = {'reportees': reportees,'reviewquestions' : allobj}
+        context = {'reportees': reportees,'reviewquestions' : allobj,'assignedtask': True}
     return render_to_response(
        'ReviewProcess/createtask.html',context,
-       context_instance=RequestContext(request)
+       context_instance=RequestContext(request),
    )
 
 @login_required
@@ -115,7 +115,6 @@ def update_profile(request):
 def save_user_question(request):
     """
     """
-    uname = ''
     if request.method == 'POST':
         sel_value = request.POST.get('selectcount').split(',')
         count = len(sel_value)
@@ -128,15 +127,23 @@ def save_user_question(request):
                 user_task = UserTask.objects.create(user_id=uid,assigned_by=int(request.user.id))
         else:
             user_task_exits.objects.create(user_id=uid,assigned_by=int(request.user.id))
-        if(UserReviewQuestion.objects.count()):
-            dd = UserReviewQuestion.objects.get(user_id=uid)
-            dd.delete()
-            urq = UserReviewQuestion.objects.create(user_id=uid)
-            urq.question.clear()
-            for index in range(count):
-                quesid = request.POST.get('sel_ques_'+sel_value[index])
-                urq.question.add(ReviewQuestion.objects.get(id=int(quesid)))
-                urq.save()
+        if(UserReviewQuestion.objects):
+            try:
+                dd = UserReviewQuestion.objects.get(user_id=uid)
+                dd.delete()
+                urq = UserReviewQuestion.objects.create(user_id=uid)
+                urq.question.clear()
+                for index in range(count):
+                    quesid = request.POST.get('sel_ques_'+sel_value[index])
+                    urq.question.add(ReviewQuestion.objects.get(id=int(quesid)))
+                    urq.save()
+            except UserReviewQuestion.DoesNotExist, e:
+                urq = UserReviewQuestion.objects.create(user_id=uid)
+                urq.question.clear()
+                for index in range(count):
+                    quesid = request.POST.get('sel_ques_'+sel_value[index])
+                    urq.question.add(ReviewQuestion.objects.get(id=int(quesid)))
+                    urq.save()
         else:
             urq = UserReviewQuestion.objects.create(user_id=uid)
             urq.question.clear()
@@ -172,8 +179,15 @@ def show_user_form(request):
 def send_review_form_to_reviewer(request):
     """
     """
-    import pdb;pdb.set_trace()
+    ques_id_list = request.POST.getlist('quesid')
+    urq = UserReviewQuestion.objects.get(user=request.user)
+    for index in range(len(ques_id_list)):
+        question = ReviewQuestion.objects.get(id=ques_id_list[index])
+        comment = request.POST.get("text-"+ques_id_list[index])
+        rating  = request.POST.get("rq-"+ques_id_list[index])
+        reviewer = User.objects.get(id=request.POST.get("reviewer"))
+        urq.save_ratings(question, rating, comment, reviewer)
     return render_to_response(
-            'ReviewProcess/show_user_form.html',{'assignedtask': True,'questions':questions,'assigned_by_obj':assigned_by_obj})
+            'ReviewProcess/show_user_form.html',{'assignedtask': True})
 
 

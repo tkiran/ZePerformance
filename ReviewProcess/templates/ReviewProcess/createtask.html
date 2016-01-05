@@ -18,7 +18,7 @@
   <form  name="assignusertask" action="{% url "assignusertask" %}" method="POST">
     {% csrf_token %}
     {{ form }}
-	<div class="col-md-8">
+	<div class="col-md-12">
     <input type="hidden" name="username" id = "username">
 			<div id="flip">Competencies List </div>
       <div class="bs-example pre-scrollable">
@@ -50,10 +50,12 @@
         </tbody>
     </table>
     </div>
+<center>
 <div class="progressbar-container">
   <div class="progressbar-bar"></div>
     <div class="progressbar-label"></div>
 </div>
+</center>
 <div class = "ready"></div>
 <input type="hidden" id="userid" name="userid" value="">
 <input type="hidden" id="selectcount" name="selectcount" value="">

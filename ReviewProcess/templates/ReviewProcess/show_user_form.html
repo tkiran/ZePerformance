@@ -40,7 +40,7 @@
         </td>
 </div>
 <div class="col-xs-4">
-<td><textarea rows="4" cols="50"></textarea></td>
+<td><textarea name="text-{{ question.id }}" rows="4" cols="50"></textarea></td>
 </div>
 </div>
 </tr>
@@ -53,7 +53,7 @@
     <label>Select Your Reviewer Name</label>
   </div>
   <div class="col-xs-4">
-    <select class="form-control" id="sel1">
+    <select class="form-control" name="reviewer">
         <option>Select-One</option>
         <option value={{ assigned_by_obj.id }}> {{ assigned_by_obj.first_name }} </option>
       </select>
