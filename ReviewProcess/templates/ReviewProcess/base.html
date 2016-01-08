@@ -41,15 +41,30 @@
                        <ul class="nav-pills nav-stacked" style="list-style-type:none;">
                         <li><a class="disabled" href="{% url "createtask" %}">Create Task</a></li>
                         <li role="presentation">
-                            {% if assignedtask %}
+                            {% if assignedtask and assigned_task_list = '' %}
                             <a role="menuitem" tabindex="-1" href="{% url "showassignedform" %}">                          
                             My Review Form<span class="badge">1</span></a>
                             </li>
                             {% else %}
-                            <a role="menuitem" tabindex="-1" href="#">
-                            No Task <span class="badge"></span></a>
+                            <a role="menuitem" tabindex="-1" href="getformfromreportee">
+
+            
+                            
+                                <input type="hidden" name="reportee_id" value={{ assigned_task_list.user_id }}
+                            <span class="badge"></span></a>
+
                         </li>
                             {% endif %}
+                    <li role="presentation">
+                     <a role="menuitem" tabindex="-1" href="{% url "getformfromreportee" %}">
+                        {% if assigned_task_list %}
+                           {{ assigned_task_list.user }}
+                        {% endif %}
+                     </a>
+
+                    </li>
+
+            
                             
                     </ul>
                 <li>
