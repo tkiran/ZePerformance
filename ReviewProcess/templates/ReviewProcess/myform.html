@@ -1,7 +1,6 @@
-{% if reviewquestions %}
-        <ul>
-          {% for ques in reviewquestions %}
-          <li>{{ ques.designation}}}</li>
-          {% endfor %}
-        </ul>
- {% endif %}
+{% extends "ReviewProcess/base.html" %}
+
+{% block dashboard %}
+
+          <b>Review form successfully sent to {{reviewer_name}}</b>
+{% endblock %}

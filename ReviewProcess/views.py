@@ -10,7 +10,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.core.urlresolvers import reverse
 from ReviewProcess.models import ReportingManagerProfile
 from django import forms
-from ReviewProcess.models import ReviewQuestion, UserReviewQuestion, UserTask
+from ReviewProcess.models import ReviewQuestion, UserReviewQuestion, UserTask, UserSelfRating
 from django.contrib.auth.models import User
 
 def index(request):
@@ -40,8 +40,12 @@ def home(request):
     assignedtask = False
     if(request.user.usertask_set.all()):
         assignedtask = True
+    assigned_task_list = ''
+    if request.user.rating_reviewer.all().count():
+        assigned_task_list = request.user.rating_reviewer.all()[0]
     context = RequestContext(request, {
        'name': 'Aman',
+       'assigned_task_list': assigned_task_list,
        'assignedtask' : assignedtask
     })
     return HttpResponse(template.render(context))
@@ -70,7 +74,7 @@ def Test(request):
 @login_required
 def createtask(request):
     # Redirect back to index page.
-    context = {'assignedtask': True}
+    context = {'assignedtask': True,'assigned_task_list':''}
     if ReportingManagerProfile.objects.filter(id=request.user.id).count():
         reporter = ReportingManagerProfile.objects.get(id=request.user.id)
         reportees = reporter.reportees.all()
@@ -78,7 +82,10 @@ def createtask(request):
         context['reviewquestions'] = allobj
         questiondict = {}
         questionset = []
-        context = {'reportees': reportees,'reviewquestions' : allobj,'assignedtask': True}
+        assigned_task_list = ''
+        if(request.user.rating_reviewer.all()):
+            assigned_task_list = request.user.rating_reviewer.all()[0]
+        context = {'reportees': reportees,'reviewquestions' : allobj,'assignedtask': 'True','assigned_task_list':assigned_task_list}
     return render_to_response(
        'ReviewProcess/createtask.html',context,
        context_instance=RequestContext(request),
@@ -181,13 +188,52 @@ def send_review_form_to_reviewer(request):
     """
     ques_id_list = request.POST.getlist('quesid')
     urq = UserReviewQuestion.objects.get(user=request.user)
-    for index in range(len(ques_id_list)):
-        question = ReviewQuestion.objects.get(id=ques_id_list[index])
-        comment = request.POST.get("text-"+ques_id_list[index])
-        rating  = request.POST.get("rq-"+ques_id_list[index])
-        reviewer = User.objects.get(id=request.POST.get("reviewer"))
-        urq.save_ratings(question, rating, comment, reviewer)
+    reviewer_save_data = UserSelfRating.objects.filter(user_id=5)
+    if(len(reviewer_save_data)):
+        
+        for i in range(len(reviewer_save_data)):
+            reviewer_save_data[i].delete()
+
+
+        for index in range(len(ques_id_list)):
+            question = ReviewQuestion.objects.get(id=ques_id_list[index])
+            comment = request.POST.get("text-"+ques_id_list[index])
+            rating  = request.POST.get("rq-"+ques_id_list[index])
+            reviewer = User.objects.get(id=request.POST.get("reviewer"))
+            urq.save_ratings(question, rating, comment, reviewer)
+    else:
+        for index in range(len(ques_id_list)):
+            question = ReviewQuestion.objects.get(id=ques_id_list[index])
+            comment = request.POST.get("text-"+ques_id_list[index])
+            rating  = request.POST.get("rq-"+ques_id_list[index])
+            reviewer = User.objects.get(id=request.POST.get("reviewer"))
+            urq.save_ratings(question, rating, comment, reviewer)
+    reviewer_name = User.objects.get(id=request.POST.get("reviewer")).username
     return render_to_response(
-            'ReviewProcess/show_user_form.html',{'assignedtask': True})
+            'ReviewProcess/myform.html',{'assignedtask': True,'reviewer_name':reviewer_name})
 
 
+@login_required
+def get_review_form_reportee(request):
+    """
+    """
+    review_val_list = {}
+    list_val = []
+    all_obj = request.user.rating_reviewer.all()
+    objcount = all_obj.count()
+    import pdb;pdb.set_trace()
+    for i in range(objcount):
+        if int(request.user.rating_reviewer.all()[i].__dict__.get('user_id')) == 5:
+            qid = request.user.rating_reviewer.all()[i].__dict__.get('question_id')
+            question =  ReviewQuestion.objects.get(id=int(qid)).__dict__['competencies']
+            rating  = request.user.rating_reviewer.all()[i].__dict__.get('rating')
+            note  = request.user.rating_reviewer.all()[i].__dict__.get('note')
+            list_val.append(str(question))
+            list_val.append(str(rating))
+            list_val.append(str(note))
+            review_val_list[i]=list_val
+            list_val = []
+    context = review_val_list
+    return render_to_response(
+            'ReviewProcess/assignedtaskbyreportee.html',
+            {'text':'aman','review_val_list':review_val_list})

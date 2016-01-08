@@ -14,4 +14,5 @@ urlpatterns = [
                url(r'^showassignedtask/$', views.show_user_task, name='showassignedtask'),
                url(r'^showassignedform/$', views.show_user_form, name='showassignedform'),
                url(r'^sendformtoreviewer/$', views.send_review_form_to_reviewer, name='sendformtoreviewer'),
+               url(r'^getformfromreportee/$', views.get_review_form_reportee, name='getformfromreportee'),
 ]
